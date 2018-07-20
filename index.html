@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<!-- <link rel="icon" href="/favicon.ico" type="image/x-icon"> -->
+<link rel="stylesheet" href="css/style.css">
+
+<script type="text/javascript" src="js/lib/jquery-3.3.1.js"></script>
+
+<script type="text/javascript" src="js/login.js"></script>
+<script type="text/javascript">
+ function verify() {
+
+    var data  = {
+      username : $('#username').val(),
+      password : $('#password').val(),
+      type : 'login'
+    }
+   
+    $.post("service/app_api.php", data,
+    function(data, status){
+        if(data.status_code === 'fail'){
+          $('#error').html(data.status_message)
+        }else{
+          window.location.href = "home.html";
+        }
+    });
+  
+ }
+</script>
+</head>
+<body>
+
+<div id="home">
+  
+
+</div>
+
+
+<div class="login-page" id="">
+  <div class="form">
+		<img src="https://s3-ap-southeast-1.amazonaws.com/bsy/iportal/images/airtel-logo-red-text-horizontal.jpg" height="50"> 
+		<form class="register-form" action="service/app_api.php">
+      <h2>Register Now</h2>
+      <input type="text" name="firstname" placeholder="first name"/>
+      <input type="text" name="lastname" placeholder="last name"/>
+      <input type="text" name="mobile" placeholder="mobile number"/>
+      <input type="text" name="email" placeholder="email address"/>
+      <input type="password" name="password" placeholder="password"/>
+      <input type="hidden" name="type" value="register" />
+      <button>create</button>
+      <p class="message">Already registered? <a onclick="$('form').animate({height: 'toggle', opacity: 'toggle'}, 'slow');">Sign In</a></p>
+    </form>
+    <form class=""  action="service/app_api.php">
+       <h2>Login</h2>
+      <input type="text" name="username" id="username"  placeholder="email or mobile number"/>
+      <input type="password" name="password"  id="password" placeholder="password"/>
+      <input type="hidden" name="type" value="login" />
+      <p id="error" style="color: red"> </p>
+      <button type="button" onclick="verify()">Login</button>
+    <p class="message">Not registered? <a onclick="$('form').animate({height: 'toggle', opacity: 'toggle'}, 'slow');">Create an account</a></p>
+    </form>
+  </div>
+</div>
+</body>
+</html>
+
+
